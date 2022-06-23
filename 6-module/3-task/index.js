@@ -1,7 +1,71 @@
 import createElement from '../../assets/lib/create-element.js';
+import slides from './slides.js';
 
 export default class Carousel {
-  constructor(slides) {
+ 
+ constructor(slides){
+   this.slides = slides;
+   this.elem = document.createElement('div');
+   this.elem.classList.add("carousel");
+   const buttonRight = createElement(` <div class="carousel__arrow carousel__arrow_right">
+   <img src="/assets/images/icons/angle-icon.svg" alt="icon">
+   </div>`);
+   const buttonLeft = createElement(`<div class="carousel__arrow carousel__arrow_left">
+   <img src="/assets/images/icons/angle-left-icon.svg" alt="icon">
+   </div>`);
+   this.elem.append(buttonRight);
+   this.elem.append(buttonLeft);
+   this.inner = document.createElement('div');
+   this.inner.classList.add('carousel__inner');
+   this.elem.append(this.inner);
+   this.createCarousel();
+   this.initCarousel();
+ }
+  createCarousel(){
+    this.slides.forEach( item => { let slide = createElement(`<div class="carousel__slide" data-id="penang-shrimp">
+    <img src="/assets/images/carousel/${item.id} class="carousel__img" alt="slide">
+    <div class="carousel__caption">
+      <span class="carousel__price">€${item.price}</span>
+      <div class="carousel__title">${item.name}</div>
+      <button type="button" class="carousel__button">
+        <img src="/assets/images/icons/plus-icon.svg" alt="icon">
+      </button>
+    </div>
+  </div>`);
+  this.inner.append(slide);
+    
+  })
+
+}
+}
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ /* constructor(slides) {
     this.slides = slides;
     this.elem = document.createElement('div');
     this.elem.classList.add("carousel");
@@ -101,3 +165,4 @@ export default class Carousel {
 
 
 }
+*/
