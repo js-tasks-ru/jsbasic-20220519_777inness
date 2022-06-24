@@ -10,7 +10,7 @@ export default class Carousel {
     <img src="/assets/images/icons/angle-icon.svg" alt="icon">
   </div> `);
 
-  const buttonLeft = createElement(`<div class="carousel__arrow carousel__arrow_left">
+    const buttonLeft = createElement(`<div class="carousel__arrow carousel__arrow_left">
     <img src="/assets/images/icons/angle-left-icon.svg" alt="icon">
   </div></div>`);
 
@@ -21,9 +21,6 @@ export default class Carousel {
     this.elem.append(this.inner);
     this.createCarousel();
     this.initCarousel();
-
-
-
   }
   createCarousel() {
 
@@ -38,7 +35,7 @@ export default class Carousel {
       </button>
     </div>
   </div>`);
-     slide.querySelector('.carousel__button').onclick = () => this.addToCart(item);
+      slide.querySelector('.carousel__button').onclick = () => this.addToCart(item);
       this.inner.append(slide);
     })
   }
@@ -66,9 +63,7 @@ export default class Carousel {
 
       updatePosition();
 
-
     };
-
 
     carouselArrowLeft.onclick = () => {
       currentSlide = Math.max(0, currentSlide - 1);
@@ -82,7 +77,7 @@ export default class Carousel {
 
       this.inner.style.transform = `translateX(${newValue}px)`;
 
-      if (currentSlide === slideSum-1) {
+      if (currentSlide === slideSum - 1) {
         carouselArrowRight.style.display = 'none';
       } else {
         carouselArrowRight.style.display = '';
@@ -98,24 +93,4 @@ export default class Carousel {
 
     updatePosition();
   }
-
-
 }
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
- 
- 
- 
- 
