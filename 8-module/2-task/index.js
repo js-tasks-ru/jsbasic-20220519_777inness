@@ -5,15 +5,42 @@ export default class ProductGrid {
   constructor(products) {
     this.products = products;
     this.filters = {};
+
     this.elem = createElement(`<div class="products-grid">
     <div class="products-grid__inner">
     </div>
   </div>`);
-    this.addProducts();
-    this.update(this.filters);
+
+    this.updateFilter()
+
+    //this.updateFilter(filters);
+
   }
-  addProducts() {
-    this.products.forEach(item => {
+  updateFilter(filters = {}) {
+    this.filters = { ...this.filters, ...filters };
+    let newProducts = this.products;
+
+    filters = this.filters;
+    if (filters.noNuts === true) {
+      newProducts = this.products.filter(product =>
+        (!product.nuts));
+    }
+    if (filters.vegeterianOnly === true) {
+      newProducts = newProducts.filter(product =>
+        (product.vegeterian === true));
+    }
+    if (Number.isFinite(filters.maxSpiciness)) {
+      newProducts = newProducts.filter(product =>
+        (product.spiciness <= filters.maxSpiciness));
+    }
+    if (filters.category) {
+      newProducts = newProducts.filter(product =>
+        (product.category === filters.category));
+    }
+
+    this.elem.querySelector('.products-grid__inner').innerHTML = '';
+
+    newProducts.forEach(item => {
       let product = createElement(`<div class="card">
     <div class="card__top">
         <img src="/assets/images/products/${item.image}" class="card__image" alt="product">
@@ -29,13 +56,6 @@ export default class ProductGrid {
       this.elem.querySelector('.products-grid__inner').append(product);
     })
   }
-  update(filters) {
-
-
-
-
-  }
-
 }
 
 

@@ -41,10 +41,7 @@ export default class CartIcon {
   _initialTopCoord;
   updatePosition() {
     let initialTopCoord = this._initialTopCoord || (this._initialTopCoord = this.elem.getBoundingClientRect().top + window.pageYOffset);
-   console.log(this.elem.getBoundingClientRect().top);
-   console.log(window.pageYOffset);
-   console.log(initialTopCoord);
-   
+
   
 
     if (window.pageYOffset > initialTopCoord) {
