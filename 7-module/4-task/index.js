@@ -45,9 +45,42 @@ export default class StepSlider {
       this._moving = true;
     })
 
+    this.elem.addEventListener('click', (event) => {
+      let left = event.clientX - this.elem.getBoundingClientRect().left;
+      let leftRelative = left / this.elem.offsetWidth;
+      if (leftRelative < 0) {
+        leftRelative = 0;
+      }
+
+      if (leftRelative > 1) {
+        leftRelative = 1;
+      }
+
+      let leftPercents = leftRelative * 100;
+      thumb.style.left = `${leftPercents}%`;
+      progress.style.width = `${leftPercents}%`;
+
+
+      let approximateValue = leftRelative * segments;
+
+      value = Math.round(approximateValue);
+
+      sliderValue.innerHTML = value;
+      // stepsElem.children[value].classList.add("slider__step-active");
+
+      thumb.style.left = `${(value * 100) / segments}%`;
+      progress.style.width = `${(value * 100) / segments}%`;
+
+      let ev = new CustomEvent('slider-change', {
+        detail: value,
+        bubbles: true
+      })
+      this.elem.dispatchEvent(ev);
+    })
+
     document.addEventListener('pointermove', (event) => {
       if (!this._moving) return;
-      
+
       let left = event.clientX - this.elem.getBoundingClientRect().left;
       let leftRelative = left / this.elem.offsetWidth;
       if (leftRelative < 0) {
@@ -70,13 +103,14 @@ export default class StepSlider {
       thumb.style.left = `${leftPercents}%`;
       progress.style.width = `${leftPercents}%`;
 
-      
+
       let approximateValue = leftRelative * segments;
 
       value = Math.round(approximateValue);
 
       sliderValue.innerHTML = value;
       stepsElem.children[value].classList.add("slider__step-active");
+
     })
 
     document.addEventListener('pointerup', () => {
@@ -84,14 +118,14 @@ export default class StepSlider {
 
       thumb.style.left = `${(value * 100) / segments}%`;
       progress.style.width = `${(value * 100) / segments}%`;
-      this.elem.classList.remove('slider_dragging');
-      
+
       let ev = new CustomEvent('slider-change', {
         detail: value,
         bubbles: true
       })
       this.elem.dispatchEvent(ev);
-    })
+      this.elem.classList.remove('slider_dragging');
 
+    })
   }
 }
