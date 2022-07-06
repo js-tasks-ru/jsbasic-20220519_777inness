@@ -41,19 +41,8 @@ export default class ProductGrid {
     this.elem.querySelector('.products-grid__inner').innerHTML = '';
 
     newProducts.forEach(item => {
-      let product = createElement(`<div class="card">
-    <div class="card__top">
-        <img src="/assets/images/products/${item.image}" class="card__image" alt="product">
-        <span class="card__price">€${item.price.toFixed(2)}</span>
-    </div>
-    <div class="card__body">
-        <div class="card__title">${item.name}</div>
-        <button type="button" class="card__button">
-            <img src="/assets/images/icons/plus-icon.svg" alt="icon">
-        </button>
-    </div>
-    </div>`);
-      this.elem.querySelector('.products-grid__inner').append(product);
+      let product = new ProductCard(item);
+      this.elem.querySelector('.products-grid__inner').append(product.elem);
     })
   }
 }

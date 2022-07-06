@@ -160,9 +160,12 @@ export default class Cart {
       })
     })
 
-   let submitButton =  document.querySelector('button[type="submit"]');
+   /* let submitButton =  document.querySelector('button[type="submit"]');
     submitButton.addEventListener('submit', this.onSubmit(event));
-    
+    */
+   
+
+    document.querySelector('.cart-form').addEventListener('submit', (e)  => this.onSubmit(e))
 
   }
 
@@ -204,14 +207,15 @@ export default class Cart {
    
   }
 
-  onSubmit(event) {
-    document.querySelector('.cart-form').addEventListener('submit', async (event) => {
+
+ async onSubmit(event) {
+    /*document.querySelector('.cart-form').addEventListener('submit', async (event) => { */
       event.preventDefault();
-      document.querySelector('button[type="submit"]').classList.add('is-loading');
+      // document.querySelector('button[type="submit"]').classList.add('is-loading');
       let form = document.querySelector('.cart-form');
       let formData = new FormData(form);
 
-      let response = await fetch('https://httpbin.org/post', {
+      let response = await  fetch('https://httpbin.org/post', {
         method: 'POST',
         body: formData
       });
@@ -228,7 +232,7 @@ export default class Cart {
        this._modal.setBody(div);
        console.log(this.cartItems);
       }
-    });
+   // });
   };
 
   addEventListeners() {
@@ -236,4 +240,6 @@ export default class Cart {
 
   }
 }
+
+
 
