@@ -18,8 +18,8 @@ export default class ProductCard {
 </div>
 </div>`);
 
-const btn = this.elem.querySelector('.card__button');
-btn.onclick = this.addToCart;
+    const btn = this.elem.querySelector('.card__button');
+    btn.onclick = this.addToCart;
   }
   addToCart = () => {
     let event = new CustomEvent("product-add", {
